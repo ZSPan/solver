@@ -1,11 +1,9 @@
 package com.pan.solver.service;
 
+import com.pan.solver.entity.User;
+
 public interface UserService {
 
-    void addUser();
-
-    void updateUser();
-
-    void loginUser();
+    User insertOrUpdate(User user);
 
 }
