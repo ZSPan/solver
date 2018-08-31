@@ -38,7 +38,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "email", columnDefinition = "VARCHAR(100) DEFAULT ''", nullable = false, unique = true)
+    @Column(name = "email", columnDefinition = "VARCHAR(255) DEFAULT ''", nullable = false, unique = true)
     private String email;
 
     @Column(name = "nickname", columnDefinition = "VARCHAR(30) DEFAULT ''", nullable = false, unique = true)
@@ -48,7 +48,7 @@ public class User {
     private String password;
 
     @Enumerated(value = EnumType.STRING)
-    @Column(name = "sex", columnDefinition = "VARCHAR(30) DEFAULT ''")
+    @Column(name = "sex", columnDefinition = "VARCHAR(30) DEFAULT NULL")
     private Sex sex;
 
     @Column(name = "headPortrait", columnDefinition = "VARCHAR(100) DEFAULT ''", nullable = false)
