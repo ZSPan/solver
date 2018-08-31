@@ -2,7 +2,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/solver?createDatabaseIfNotExist=true&autoReconnect=true&useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=UTC
     username: root
-    password:
+    password: admin
     driver-class-name: com.mysql.jdbc.Driver
   jpa:
     properties:
