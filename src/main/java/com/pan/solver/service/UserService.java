@@ -4,6 +4,11 @@ import com.pan.solver.entity.User;
 
 public interface UserService {
 
-    User insertOrUpdate(User user);
+    User register(User user);
+
+    User update(User user);
+
+    User login(User user);
+
 
 }
