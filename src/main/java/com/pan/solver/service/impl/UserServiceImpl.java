@@ -17,8 +17,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User insertOrUpdate(User user) {
-        //TODO: save or update
+    public User register(User user) {
         return userRepository.save(user);
     }
+
+    @Override
+    public User update(User user) {
+        return userRepository.save(user);
+    }
+
+    @Override
+    public User login(User user) {
+        return userRepository.save(user);
+    }
+
+
 }

@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
 import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -25,26 +26,46 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @EntityListeners(AuditingEntityListener.class)
 public class User {
 
-  public static final String TABLE_NAME = "User";
+    public static final String TABLE_NAME = "User";
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-  @Column(name = "nickname", columnDefinition = "VARCHAR(30) DEFAULT ''", nullable = false, unique = true)
-  private String nickname;
+    @Column(name = "solverNumber", columnDefinition = "VARCHAR(30) DEFAULT ''", nullable = false, unique = true, updatable = false)
+    private String solverNumber;
 
-  @Column(name = "email", columnDefinition = "VARCHAR(100) DEFAULT ''", nullable = false, unique = true)
-  private String email;
+    @Column(name = "email", columnDefinition = "VARCHAR(100) DEFAULT ''", nullable = false, unique = true)
+    private String email;
 
-  @Column(name = "password", columnDefinition = "VARCHAR(150) DEFAULT ''", nullable = false)
-  private String password;
+    @Column(name = "password", columnDefinition = "VARCHAR(150) DEFAULT ''", nullable = false)
+    private String password;
 
-  @CreatedDate
-  @Temporal(TemporalType.TIMESTAMP)
-  private Date creation;
+    @Column(name = "headPortrait", columnDefinition = "VARCHAR(100) DEFAULT ''", nullable = false)
+    private String headPortrait;
 
-  @LastModifiedDate
-  @Temporal(TemporalType.TIMESTAMP)
-  private Date modification;
+    @Column(name = "nickname", columnDefinition = "VARCHAR(30) DEFAULT ''", nullable = false, unique = true)
+    private String nickname;
+
+    @Column(name = "sex", columnDefinition = "VARCHAR(30) DEFAULT ''")
+    private String sex;
+
+    @Column(name = "district", columnDefinition = "VARCHAR(30) DEFAULT ''")
+    private String district;
+
+    @Column(name = "motto", columnDefinition = "VARCHAR(200) DEFAULT ''")
+    private String motto;
+
+    @Column(name = "lastLoginTime")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date lastLoginTime;
+
+    @CreatedDate
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date creation;
+
+    @LastModifiedDate
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date modification;
+
 }

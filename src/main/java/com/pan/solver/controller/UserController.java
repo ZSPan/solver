@@ -21,8 +21,18 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping(value = "")
-    public User insertOrUpdate(@RequestBody User user) {
-        return userService.insertOrUpdate(user);
+    @PostMapping(value = "register")
+    public User register(@RequestBody User user) {
+        return userService.register(user);
+    }
+
+    @PostMapping(value = "update")
+    public User update(@RequestBody User user) {
+        return userService.update(user);
+    }
+
+    @PostMapping(value = "login")
+    public User login(@RequestBody User user) {
+        return userService.login(user);
     }
 }
