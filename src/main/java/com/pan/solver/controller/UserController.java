@@ -1,6 +1,7 @@
 package com.pan.solver.controller;
 
-import com.pan.solver.entity.User;
+import com.pan.solver.dto.UserDto;
+import com.pan.solver.mapper.UserMapper;
 import com.pan.solver.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,24 +16,26 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     private final UserService userService;
+    private final UserMapper userMapper;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, UserMapper userMapper) {
         this.userService = userService;
+        this.userMapper = userMapper;
     }
 
     @PostMapping(value = "register")
-    public User register(@RequestBody User user) {
-        return userService.register(user);
+    public UserDto register(@RequestBody UserDto user) {
+        return userMapper.toDto(userService.register(userMapper.toEntity(user)));
     }
 
     @PostMapping(value = "update")
-    public User update(@RequestBody User user) {
-        return userService.update(user);
+    public UserDto update(@RequestBody UserDto user) {
+        return userMapper.toDto(userService.update(userMapper.toEntity(user)));
     }
 
     @PostMapping(value = "login")
-    public User login(@RequestBody User user) {
-        return userService.login(user);
+    public UserDto login(@RequestBody UserDto user) {
+        return userMapper.toDto(userService.login(userMapper.toEntity(user)));
     }
 }
