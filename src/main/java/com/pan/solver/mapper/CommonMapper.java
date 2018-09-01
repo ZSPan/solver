@@ -2,10 +2,12 @@ package com.pan.solver.mapper;
 
 import com.pan.solver.entity.User.Sex;
 import java.util.Date;
+import org.springframework.stereotype.Component;
 
 /**
  * @author yemingfeng
  */
+@Component
 class CommonMapper {
 
     Long toTs(Date date) {
