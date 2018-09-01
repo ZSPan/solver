@@ -24,7 +24,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Entity
 @Table(name = VerifyCode.TABLE_NAME, indexes = {
     @Index(name = "email", columnList = "email"),
-    @Index(name = "code", columnList = "code", unique = true),
+    @Index(name = "code", columnList = "code"),
     @Index(name = "used", columnList = "used"),
     @Index(name = "type", columnList = "type")
 })
