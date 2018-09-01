@@ -4,11 +4,6 @@ import com.pan.solver.entity.User;
 
 public interface UserService {
 
-    User register(User user);
-
-    User update(User user);
-
-    User login(User user);
-
+    User register(User user, String verifyCode);
 
 }

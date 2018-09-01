@@ -21,4 +21,6 @@ public class UserDto {
     private Long lastLoginTime;
     private Date creation;
     private Date modification;
+
+    private String verifyCode;
 }

@@ -46,4 +46,9 @@ public class VerifyCodeServiceImpl implements VerifyCodeService {
             log.error("", e);
         }
     }
+
+    @Override
+    public VerifyCode findLatestVerifyCode(String email, Type type) {
+        return verifyCodeRepository.findFirstByEmailEqualsAndTypeEqualsOrderByCreationDesc(email, type);
+    }
 }

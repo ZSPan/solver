@@ -24,18 +24,8 @@ public class UserController {
         this.userMapper = userMapper;
     }
 
-    @PostMapping(value = "register")
+    @PostMapping("")
     public UserDto register(@RequestBody UserDto user) {
-        return userMapper.toDto(userService.register(userMapper.toEntity(user)));
-    }
-
-    @PostMapping(value = "update")
-    public UserDto update(@RequestBody UserDto user) {
-        return userMapper.toDto(userService.update(userMapper.toEntity(user)));
-    }
-
-    @PostMapping(value = "login")
-    public UserDto login(@RequestBody UserDto user) {
-        return userMapper.toDto(userService.login(userMapper.toEntity(user)));
+        return userMapper.toDto(userService.register(userMapper.toEntity(user), user.getVerifyCode()));
     }
 }
