@@ -16,16 +16,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/verifyCode")
 public class VerifyCodeController {
 
-  private final VerifyCodeService verifyCodeService;
+    private final VerifyCodeService verifyCodeService;
 
-  @Autowired
-  public VerifyCodeController(VerifyCodeService verifyCodeService) {
-    this.verifyCodeService = verifyCodeService;
-  }
+    @Autowired
+    public VerifyCodeController(VerifyCodeService verifyCodeService) {
+        this.verifyCodeService = verifyCodeService;
+    }
 
-  @PostMapping("")
-  public void sendVerifyCode(@RequestParam("email") String email,
-      @RequestParam("type") Type type) {
-    verifyCodeService.sendVerifyCode(email, type);
-  }
+    @PostMapping("")
+    public void sendVerifyCode(@RequestParam("email") String email,
+        @RequestParam("type") Type type) {
+        verifyCodeService.sendVerifyCode(email, type);
+    }
 }
