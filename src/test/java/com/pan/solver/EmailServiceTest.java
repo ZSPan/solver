@@ -1,6 +1,6 @@
 package com.pan.solver;
 
-import com.pan.solver.event.EmailEvent;
+import com.pan.solver.event.Email;
 import com.pan.solver.service.EmailService;
 import javax.mail.MessagingException;
 import org.junit.Ignore;
@@ -20,11 +20,11 @@ public class EmailServiceTest {
 
     @Test
     public void sendMailAsync() throws MessagingException {
-        emailService.sendAsync(new EmailEvent("393162333@qq.com", "async test", "test"));
+        emailService.sendAsync(new Email("393162333@qq.com", "async test", "test"));
     }
 
     @Test
     public void sendMailSync() throws MessagingException {
-        emailService.sendSync(new EmailEvent("393162333@qq.com", "sync test", "test"));
+        emailService.sendSync(new Email("393162333@qq.com", "sync test", "test"));
     }
 }

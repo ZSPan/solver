@@ -24,8 +24,8 @@ public class VerifyCodeController {
     }
 
     @PostMapping("")
-    public void sendVerifyCode(@RequestParam("email") String email,
+    public void sendVerifyCode(@RequestParam("emailAddress") String emailAddress,
         @RequestParam("type") Type type) {
-        verifyCodeService.sendVerifyCode(email, type);
+        verifyCodeService.sendVerifyCode(emailAddress, type);
     }
 }

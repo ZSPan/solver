@@ -23,7 +23,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Data
 @Entity
 @Table(name = VerifyCode.TABLE_NAME, indexes = {
-    @Index(name = "email", columnList = "email"),
+    @Index(name = "emailAddress", columnList = "emailAddress"),
     @Index(name = "code", columnList = "code"),
     @Index(name = "used", columnList = "used"),
     @Index(name = "type", columnList = "type")
@@ -37,7 +37,7 @@ public class VerifyCode {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "email", columnDefinition = "VARCHAR(255) DEFAULT 0", nullable = false)
+    @Column(name = "emailAddress", columnDefinition = "VARCHAR(255) DEFAULT 0", nullable = false)
     private String email;
 
     @Column(name = "code", columnDefinition = "VARCHAR(255) DEFAULT ''", nullable = false)

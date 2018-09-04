@@ -1,6 +1,6 @@
 package com.pan.solver.service;
 
-import com.pan.solver.event.EmailEvent;
+import com.pan.solver.event.Email;
 import javax.mail.MessagingException;
 
 /**
@@ -8,8 +8,8 @@ import javax.mail.MessagingException;
  */
 public interface EmailService {
 
-    void sendAsync(EmailEvent emailEvent) throws MessagingException;
+    void sendAsync(Email email) throws MessagingException;
 
-    void sendSync(EmailEvent emailEvent) throws MessagingException;
+    void sendSync(Email email) throws MessagingException;
 
 }

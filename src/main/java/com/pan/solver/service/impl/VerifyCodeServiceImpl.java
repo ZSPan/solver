@@ -2,7 +2,7 @@ package com.pan.solver.service.impl;
 
 import com.pan.solver.entity.VerifyCode;
 import com.pan.solver.entity.VerifyCode.Type;
-import com.pan.solver.event.EmailEvent;
+import com.pan.solver.event.Email;
 import com.pan.solver.repository.VerifyCodeRepository;
 import com.pan.solver.service.EmailService;
 import com.pan.solver.service.VerifyCodeService;
@@ -41,7 +41,7 @@ public class VerifyCodeServiceImpl implements VerifyCodeService {
         verifyCodeRepository.save(verifyCode);
 
         try {
-            emailService.sendAsync(new EmailEvent(email, "register", code));
+            emailService.sendAsync(new Email(email, "register", code));
         } catch (MessagingException e) {
             log.error("", e);
         }

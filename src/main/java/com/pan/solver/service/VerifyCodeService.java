@@ -9,8 +9,8 @@ import com.pan.solver.entity.VerifyCode.Type;
 
 public interface VerifyCodeService {
 
-    void sendVerifyCode(String email, Type type);
+    void sendVerifyCode(String emailAddress, Type type);
 
-    VerifyCode findLatestVerifyCode(String email, Type type);
+    VerifyCode findLatestVerifyCode(String emailAddress, Type type);
 
 }

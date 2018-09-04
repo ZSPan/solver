@@ -25,7 +25,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Data
 @Entity
 @Table(name = User.TABLE_NAME, indexes = {
-    @Index(name = "email", columnList = "email", unique = true),
+    @Index(name = "emailAddress", columnList = "emailAddress", unique = true),
     @Index(name = "nickname", columnList = "nickname", unique = true),
     @Index(name = "sex", columnList = "sex")
 })
@@ -38,8 +38,8 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "email", columnDefinition = "VARCHAR(255) DEFAULT ''", nullable = false, unique = true)
-    private String email;
+    @Column(name = "emailAddress", columnDefinition = "VARCHAR(255) DEFAULT ''", nullable = false, unique = true)
+    private String emailAddress;
 
     @Column(name = "nickname", columnDefinition = "VARCHAR(30) DEFAULT ''", nullable = false, unique = true)
     private String nickname;

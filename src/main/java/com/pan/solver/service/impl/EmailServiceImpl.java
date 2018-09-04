@@ -1,6 +1,6 @@
 package com.pan.solver.service.impl;
 
-import com.pan.solver.event.EmailEvent;
+import com.pan.solver.event.Email;
 import com.pan.solver.service.EmailService;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
@@ -28,14 +28,14 @@ public class EmailServiceImpl implements EmailService, DisposableBean {
     private String from;
 
     private final JavaMailSender javaMailSender;
-    private final LinkedBlockingQueue<EmailEvent> emailEvents;
+    private final LinkedBlockingQueue<Email> emails;
     private final ExecutorService executorService;
     private boolean stop;
 
     @Autowired
     public EmailServiceImpl(JavaMailSender javaMailSender) {
         this.javaMailSender = javaMailSender;
-        this.emailEvents = new LinkedBlockingQueue<>();
+        this.emails = new LinkedBlockingQueue<>();
         this.executorService = Executors.newSingleThreadExecutor();
         this.stop = false;
 
@@ -43,22 +43,22 @@ public class EmailServiceImpl implements EmailService, DisposableBean {
     }
 
     @Override
-    public void sendAsync(EmailEvent emailEvent) {
+    public void sendAsync(Email email) {
       try {
-        emailEvents.put(emailEvent);
+        emails.put(email);
       } catch (InterruptedException e) {
-        log.error("put: {} error", emailEvent, e);
+        log.error("put: {} error", email, e);
       }
     }
 
     @Override
-    public void sendSync(EmailEvent emailEvent) throws MessagingException {
+    public void sendSync(Email email) throws MessagingException {
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
         helper.setFrom(from);
-        helper.setTo(emailEvent.getTo());
-        helper.setSubject(emailEvent.getSubject());
-        helper.setText(emailEvent.getText());
+        helper.setTo(email.getTo());
+        helper.setSubject(email.getSubject());
+        helper.setText(email.getText());
         javaMailSender.send(mimeMessage);
     }
 
@@ -66,8 +66,8 @@ public class EmailServiceImpl implements EmailService, DisposableBean {
         log.info("start send emails from queue");
         while(!stop) {
             try {
-                EmailEvent emailEvent = emailEvents.take();
-                sendSync(emailEvent);
+                Email email = emails.take();
+                sendSync(email);
             } catch (Exception e) {
                 log.error("", e);
             }

@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User register(User user, String code) {
-        String email = user.getEmail();
+        String email = user.getEmailAddress();
         VerifyCode verifyCode = verifyCodeService.findLatestVerifyCode(email, Type.REGISTER);
         if (!StringUtils.equals(code, verifyCode.getCode()) ||
             verifyCode.getCreation().getTime() + VERIFY_CODE_IN_DATE >=
