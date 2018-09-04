@@ -6,4 +6,8 @@ public interface UserService {
 
     User register(User user, String verifyCode);
 
+    String loginByEmailAddress(String emailAddress, String passowrd);
+
+    String loginByNickname(String nickName, String password);
+
 }
