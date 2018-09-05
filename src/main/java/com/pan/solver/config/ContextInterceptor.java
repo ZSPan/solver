@@ -1,16 +1,10 @@
-package com.pan.solver.filter;
+package com.pan.solver.config;
 
-import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,29 +12,29 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * @author yemingfeng
  */
 @Slf4j
 @Component
-public class IpLimitFilter implements Filter {
+public class ContextInterceptor implements HandlerInterceptor {
 
-    private static final Long MAX_REQUEST_COUNT = 60L;
+    private static final Long MAX_REQUEST_COUNT = 10L;
     private static final Long GAP = TimeUnit.MINUTES.toMillis(1);
 
-    private Map<String, IpStatus> ipCountMap;
+    private final Map<String, IpStatus> ipCountMap;
 
-    @Override
-    public void init(FilterConfig filterConfig) {
+    public ContextInterceptor() {
         this.ipCountMap = new ConcurrentHashMap<>();
-        log.info("init ip limit filter");
     }
 
     @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse,
-        FilterChain filterChain) throws IOException, ServletException {
-        String ip = servletRequest.getRemoteAddr();
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
+        Object handler) {
+        String ip = request.getRemoteAddr();
         IpStatus ipStatus = ipCountMap.computeIfAbsent(ip, (unused) ->
             new IpStatus(new AtomicLong(0L), System.currentTimeMillis()));
         if (System.currentTimeMillis() - ipStatus.getLastRequestTs() >= GAP) {
@@ -50,24 +44,28 @@ public class IpLimitFilter implements Filter {
         if (ipStatus.getCount().addAndGet(1) >= MAX_REQUEST_COUNT) {
             log.warn("{} request count greater than: {} in: {}ms, so rejected it",
                 ip, ipStatus.getCount(), GAP);
-            if (servletResponse instanceof HttpServletResponse) {
-                ((HttpServletResponse) servletResponse)
-                    .sendError(HttpServletResponse.SC_SERVICE_UNAVAILABLE);
-                return;
-            }
+            throw new IpLimitException();
         }
         log.info("{} request: {} count", ip, ipStatus.getCount());
-        filterChain.doFilter(servletRequest, servletResponse);
+        return true;
     }
 
     @Override
-    public void destroy() {
-        log.info("destroy ip limit filter");
+    public void postHandle(HttpServletRequest request, HttpServletResponse response,
+        Object handler, ModelAndView modelAndView) {
+
+    }
+
+    @Override
+    public void afterCompletion(HttpServletRequest request,
+        HttpServletResponse response, Object handler, Exception ex) {
+
     }
 
     @Data
     @AllArgsConstructor
     private class IpStatus {
+
         private AtomicLong count;
         private Long lastRequestTs;
     }
