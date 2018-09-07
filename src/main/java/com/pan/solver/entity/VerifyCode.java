@@ -55,6 +55,7 @@ public class VerifyCode {
     private Date creation;
 
     public enum Type {
-        REGISTER
+        REGISTER,
+        CHANGE_PASSWORD
     }
 }

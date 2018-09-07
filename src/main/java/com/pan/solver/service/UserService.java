@@ -6,4 +6,6 @@ public interface UserService {
 
     User create(User user, String verifyCode);
 
+    User updatePassword(User user, String  verifyCode);
+
 }
