@@ -1,11 +1,11 @@
 package com.pan.solver.service;
 
-import com.pan.solver.dto.UserDto;
+import com.pan.solver.entity.User;
 
 /**
  * @Author Shipan.Zeng
  */
 public interface TokenService {
 
-    String create(UserDto userDto) throws Exception;
+    String create(User user) throws Exception;
 }

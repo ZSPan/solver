@@ -1,6 +1,6 @@
 package com.pan.solver.service.impl;
 
-import com.pan.solver.common.util.DigestUtil;
+import com.pan.solver.common.util.MD5Util;
 import com.pan.solver.entity.User;
 import com.pan.solver.entity.VerifyCode;
 import com.pan.solver.entity.VerifyCode.Type;
@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
                         System.currentTimeMillis()) {
             throw new RuntimeException("code is invalid");
         }
-        user.setPassword(DigestUtil.digest(user.getPassword()));
+        user.setPassword(MD5Util.digest(user.getPassword()));
         try {
             return userRepository.save(user);
         } catch (Exception e) {

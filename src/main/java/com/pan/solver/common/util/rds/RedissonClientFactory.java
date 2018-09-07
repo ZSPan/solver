@@ -1,4 +1,4 @@
-package com.pan.solver.common.util;
+package com.pan.solver.common.util.rds;
 
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
@@ -6,7 +6,7 @@ import org.redisson.config.Config;
 
 public class RedissonClientFactory {
 
-    static RedissonClient redissonClient;
+    private static RedissonClient redissonClient;
 
     private RedissonClientFactory() {
     }
