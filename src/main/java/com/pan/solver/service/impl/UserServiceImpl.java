@@ -45,4 +45,12 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    @Override
+    public User update(User user) {
+        if (user.getId() == null || user.getId() == 0) {
+            throw new RuntimeException("id is invalid");
+        }
+        //TODO: not update password or md5(user.getPassword())
+        return userRepository.save(user);
+    }
 }
