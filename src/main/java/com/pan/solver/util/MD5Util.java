@@ -1,4 +1,4 @@
-package com.pan.solver.common.util;
+package com.pan.solver.util;
 
 import org.springframework.util.DigestUtils;
 

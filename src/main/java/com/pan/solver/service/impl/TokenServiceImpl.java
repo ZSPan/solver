@@ -1,6 +1,6 @@
 package com.pan.solver.service.impl;
 
-import com.pan.solver.common.util.MD5Util;
+import com.pan.solver.util.MD5Util;
 import com.pan.solver.entity.User;
 import com.pan.solver.repository.UserRepository;
 import com.pan.solver.service.TokenService;
