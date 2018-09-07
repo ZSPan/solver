@@ -1,5 +1,6 @@
 package com.pan.solver.service.impl;
 
+import com.pan.solver.util.Base64Util;
 import com.pan.solver.util.MD5Util;
 import com.pan.solver.entity.User;
 import com.pan.solver.repository.UserRepository;
@@ -32,7 +33,7 @@ public class TokenServiceImpl implements TokenService {
         if (userInDB == null) {
             throw new RuntimeException("Not existed");
         } else if (StringUtils.equals(MD5Util.digest(user.getPassword()), userInDB.getPassword())) {
-            return userInDB.getId() + "_" + System.currentTimeMillis();
+            return Base64Util.encode(userInDB.getId() + "_" + System.currentTimeMillis());
         } else {
             throw new RuntimeException("Incorrect password!");
         }
