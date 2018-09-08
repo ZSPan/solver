@@ -46,6 +46,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User updatePassword(User user, String code) {
+        String email = user.getEmailAddress();
+        VerifyCode verifyCode = verifyCodeService.findLatestVerifyCode(email, Type.CHANGE_PASSWORD);
+        if (!StringUtils.equals(code, verifyCode.getCode()) ||
+                verifyCode.getCreation().getTime() + VERIFY_CODE_IN_DATE >=
+                        System.currentTimeMillis()) {
+            throw new RuntimeException("code in invalid");
+        }
+        user.setPassword(MD5Util.digest(user.getPassword()));
+    
+    @Override
     public User update(User user) {
         if (user.getId() == null || user.getId() == 0) {
             throw new RuntimeException("id is invalid");
