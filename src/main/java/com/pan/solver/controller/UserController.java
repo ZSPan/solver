@@ -26,4 +26,9 @@ public class UserController {
         return userMapper.toDto(userService.create(userMapper.toEntity(user), user.getVerifyCode()));
     }
 
+    @PutMapping
+    public UserDto update(@RequestBody UserDto user) {
+        return userMapper.toDto(userService.update(userMapper.toEntity(user)));
+    }
+
 }
