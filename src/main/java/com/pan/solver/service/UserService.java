@@ -8,4 +8,7 @@ public interface UserService {
 
     User updatePassword(User user, String  verifyCode);
 
+    User update(User user);
+
+
 }

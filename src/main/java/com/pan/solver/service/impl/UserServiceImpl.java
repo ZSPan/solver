@@ -1,6 +1,6 @@
 package com.pan.solver.service.impl;
 
-import com.pan.solver.common.util.MD5Util;
+import com.pan.solver.util.MD5Util;
 import com.pan.solver.entity.User;
 import com.pan.solver.entity.VerifyCode;
 import com.pan.solver.entity.VerifyCode.Type;
@@ -55,6 +55,13 @@ public class UserServiceImpl implements UserService {
             throw new RuntimeException("code in invalid");
         }
         user.setPassword(MD5Util.digest(user.getPassword()));
+    
+    @Override
+    public User update(User user) {
+        if (user.getId() == null || user.getId() == 0) {
+            throw new RuntimeException("id is invalid");
+        }
+        //TODO: not update password or md5(user.getPassword())
         return userRepository.save(user);
     }
 }

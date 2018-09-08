@@ -11,6 +11,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface VerifyCodeRepository extends JpaRepository<VerifyCode, Long> {
 
-    VerifyCode findFirstByEmailEqualsAndTypeEqualsOrderByCreationDesc(String email, Type type);
+    VerifyCode findFirstByEmailAndTypeOrderByCreationDesc(String email, Type type);
 
 }
