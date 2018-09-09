@@ -55,7 +55,9 @@ public class UserServiceImpl implements UserService {
             throw new RuntimeException("code in invalid");
         }
         user.setPassword(MD5Util.digest(user.getPassword()));
-    
+        return userRepository.save(user);
+    }
+
     @Override
     public User update(User user) {
         if (user.getId() == null || user.getId() == 0) {
