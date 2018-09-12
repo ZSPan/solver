@@ -51,8 +51,8 @@ public class User {
     @Column(name = "sex", columnDefinition = "VARCHAR(30) DEFAULT NULL")
     private Sex sex;
 
-    @Column(name = "headPortrait", columnDefinition = "VARCHAR(100) DEFAULT ''", nullable = false)
-    private String headPortrait;
+    @Column(name = "headPortraitName", columnDefinition = "VARCHAR(100) DEFAULT ''", nullable = false)
+    private String headPortraitName;
 
     @Column(name = "district", columnDefinition = "VARCHAR(30) DEFAULT ''")
     private String district;
