@@ -1,9 +1,10 @@
 package com.pan.solver.service;
 
+import com.pan.solver.data.Photo;
 import org.springframework.web.multipart.MultipartFile;
 
 public interface PhotoService {
 
-    void upload(MultipartFile file);
+    Photo upload(MultipartFile file);
 
 }
