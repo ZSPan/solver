@@ -35,7 +35,5 @@ public class UserController {
     @PutMapping("/password")
     public UserDto updatePassword(@RequestBody UserDto user) {
         return userMapper.toDto(userService.updatePassword(userMapper.toEntity(user), user.getVerifyCode()));
-
-
     }
 }
