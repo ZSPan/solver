@@ -8,4 +8,6 @@ import com.pan.solver.entity.User;
 public interface TokenService {
 
     String create(User user) throws Exception;
+
+    boolean ifValid(String token);
 }

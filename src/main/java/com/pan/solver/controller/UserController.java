@@ -27,8 +27,8 @@ public class UserController {
     }
 
     @PutMapping
-    public UserDto update(@RequestBody UserDto user) {
-        return userMapper.toDto(userService.update(userMapper.toEntity(user)));
+    public UserDto update(@RequestParam String token, @RequestBody UserDto userDto) {
+        return userMapper.toDto(userService.update(token, userMapper.toEntity(userDto)));
 
     }
 
