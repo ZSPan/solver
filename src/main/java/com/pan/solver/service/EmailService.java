@@ -1,6 +1,7 @@
 package com.pan.solver.service;
 
 import com.pan.solver.event.Email;
+
 import javax.mail.MessagingException;
 
 /**

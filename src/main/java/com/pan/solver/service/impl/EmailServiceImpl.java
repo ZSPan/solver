@@ -2,13 +2,6 @@ package com.pan.solver.service.impl;
 
 import com.pan.solver.event.Email;
 import com.pan.solver.service.EmailService;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.TimeUnit;
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +9,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+import java.util.concurrent.*;
 
 /**
  * @author yemingfeng
@@ -44,11 +41,11 @@ public class EmailServiceImpl implements EmailService, DisposableBean {
 
     @Override
     public void sendAsync(Email email) {
-      try {
-        emails.put(email);
-      } catch (InterruptedException e) {
-        log.error("put: {} error", email, e);
-      }
+        try {
+            emails.put(email);
+        } catch (InterruptedException e) {
+            log.error("put: {} error", email, e);
+        }
     }
 
     @Override
@@ -64,7 +61,7 @@ public class EmailServiceImpl implements EmailService, DisposableBean {
 
     private void work() {
         log.info("start send emails from queue");
-        while(!stop) {
+        while (!stop) {
             try {
                 Email email = emails.take();
                 sendSync(email);
@@ -74,10 +71,10 @@ public class EmailServiceImpl implements EmailService, DisposableBean {
         }
     }
 
-  @Override
-  public void destroy() throws Exception {
-      this.stop = true;
-      this.executorService.awaitTermination(1, TimeUnit.MINUTES);
-      log.info("stop send email, and destroy bean...");
-  }
+    @Override
+    public void destroy() throws Exception {
+        this.stop = true;
+        this.executorService.awaitTermination(1, TimeUnit.MINUTES);
+        log.info("stop send email, and destroy bean...");
+    }
 }
