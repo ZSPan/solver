@@ -1,8 +1,9 @@
 package com.pan.solver.mapper;
 
 import com.pan.solver.entity.User.Sex;
-import java.util.Date;
 import org.springframework.stereotype.Component;
+
+import java.util.Date;
 
 /**
  * @author yemingfeng

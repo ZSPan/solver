@@ -7,10 +7,11 @@ import com.pan.solver.repository.VerifyCodeRepository;
 import com.pan.solver.service.EmailService;
 import com.pan.solver.service.VerifyCodeService;
 import com.pan.solver.util.VerifyCodeUtil;
-import javax.mail.MessagingException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.mail.MessagingException;
 
 /**
  * @author yemingfeng
@@ -24,7 +25,7 @@ public class VerifyCodeServiceImpl implements VerifyCodeService {
 
     @Autowired
     public VerifyCodeServiceImpl(VerifyCodeRepository verifyCodeRepository,
-        EmailService emailService) {
+                                 EmailService emailService) {
         this.emailService = emailService;
         this.verifyCodeRepository = verifyCodeRepository;
     }
